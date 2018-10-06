@@ -1,3 +1,4 @@
+// Employee Class
 class Employee{
   constructor( firstName, LastName, idNum, jobTitle, annualSalary ){
     this.firstName = firstName;
@@ -8,13 +9,17 @@ class Employee{
   } // end constructor
 
   // function to calculate monthly salary
-  monthlySalary() {
+  calculateMonthlySalary() {
+    let monthlySalary = Math.round(this.annualSalary / 12);
+    console.log ('monthlySalary for ', this.idNum, monthlySalary);
+    return monthlySalary;
   } // end monthlySalary function
 
 } // end Employee class
 
 // employees array
 let employeesArray = [];
+let monthlyTotal = 0;
 
 // function to add employee from input to the array
 function addToArray (){
@@ -27,11 +32,13 @@ function addToArray (){
 
   // create a new employee instance
   let employeeNew = new Employee(inFirstName, inLastName, inID, inTitle, inSalary);
-  console.log('Emp New: ',employeeNew);
-  
+
   // add new employee to the array
   employeesArray.push(employeeNew);
-  console.log(employeesArray);
+
+  // increment monthly total
+  monthlyTotal += employeeNew.calculateMonthlySalary();
+
 } // end addToArray function
 
 // function to update the employee table on the DOM
@@ -52,6 +59,12 @@ function displayEmployees() {
     console.log(tableRow);
     tableDocument.append(tableRow);
   } // end for of loop
+
+  // display new Monthly Total
+  let totalDisplay = $( '#totalSection' );
+  totalDisplay.empty();
+  totalDisplay.append (`<h3>Total Monthly: ${monthlyTotal}</h3>`);
+
 } // end of displayEmployees function
 
 // function for on click event for submit button
@@ -63,7 +76,9 @@ function addEmployee () {
   addToArray();
   // Clear fields after retreiving them
   $("#inputForm").trigger('reset');
-  // Add to the DOM in list at first
+  // Set focus to First Name
+  $("#firstNameIn").focus();
+  // call function to update table 
   displayEmployees();
 } // end addEmployee function
 
