@@ -34,11 +34,18 @@ function displayEmployees() {
   let outputList = $( '#outputList');
   outputList.empty();
   // Loop through the employees array
+  let tableDocument = $( '#tableEmployees' );
+  let tableRow = `<tr><th>Firstname</th><th>Lastname</th><th>Age</th></tr>`;
+  tableDocument.empty();
+  tableDocument.append(tableRow);
   for (person of employeesArray) {
-    console.log(person); 
-    outputList.append( '<li>' + person.firstName + ': ' + person.LastName + ': ' + person.idNum + ': ' + person.jobTitle + ': ' + person.annualSalary + '</li>');
-  }
-}
+    tableRow = '<tr><td>' + person.firstName + '</td><td>' + 
+      person.LastName + '</td><td>' + person.idNum + '</td>' +
+      '</tr>';
+    console.log(tableRow);
+    tableDocument.append(tableRow);
+  } // end for of loop
+} // end of displayEmployees function
 
 // function for on click event for submit button
 function addEmployee () {
