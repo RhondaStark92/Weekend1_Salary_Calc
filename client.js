@@ -73,7 +73,7 @@ function displayEmployees() {
   // retrieve the table from the DOM and setup the header row
   let tableDocument = $( '#tableEmployees' );
   let tableRow = `<tr><th>First Name</th><th>Last Name</th><th>ID</th>
-    <th>Title</th><th>Annual Salary</th></tr>`;
+    <th>Title</th><th>Annual Salary</th><th></th></tr>`;
   // clear the table and add the header row
   tableDocument.empty();
   tableDocument.append(tableRow);
