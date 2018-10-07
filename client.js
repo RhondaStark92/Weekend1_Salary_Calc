@@ -50,11 +50,14 @@ function displayEmployees() {
   // clear the table and add the header row
   tableDocument.empty();
   tableDocument.append(tableRow);
+  let person;
   // loop through the array of employees
-  for (person of employeesArray) {
+  for ( let i = 0; i < employeesArray.length; i++ ) {
+    person = employeesArray[i];
     tableRow = '<tr><td>' + person.firstName + '</td><td>' + 
       person.LastName + '</td><td>' + person.idNum + '</td><td>' + 
       person.jobTitle + '</td><td>' + person.annualSalary + '</td>' +
+      '<td><button id=deleteRow' + i + ' class="deleteEmployee">Delete</button></td>' +
       '</tr>';
     console.log(tableRow);
     tableDocument.append(tableRow);
@@ -71,7 +74,7 @@ function displayEmployees() {
 function addEmployee () {
   // get input fields
   event.preventDefault();
-  console.log(' button clicked ');
+  console.log(' submit button clicked ');
   // call to add to the array
   addToArray();
   // Clear fields after retreiving them
@@ -89,4 +92,11 @@ $( document ).ready ( readyNow );
 function readyNow () {
   console.log( 'JQ' );
   $( '#addEmployee' ).on( 'click', addEmployee );
-} // end function
+
+  // setup listener on table
+  // $('#movieList').on('click', '.lendMovie', lendMovie);
+  $("#tableEmployees").on ( 'click', function() {
+    console.log (' table clicked ');
+    //$("input").after(" Text marked!");
+  });
+} // end readyNowfunction
