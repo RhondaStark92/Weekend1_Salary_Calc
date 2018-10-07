@@ -10,8 +10,7 @@ class Employee{
 
   // function to calculate monthly salary
   calculateMonthlySalary() {
-    let monthlySalary = Math.round(this.annualSalary / 12);
-    console.log ('monthlySalary for ', this.idNum, monthlySalary);
+    let monthlySalary = this.annualSalary / 12;
     return monthlySalary;
   } // end monthlySalary function
 
@@ -28,7 +27,7 @@ function addToArray (){
   let inLastName = $( '#lastNameIn' ).val();
   let inID = $( '#idIn' ).val();
   let inTitle = $( '#titleIn' ).val();
-  let inSalary = $( '#salaryIn' ).val();
+  let inSalary = parseFloat( $('#salaryIn').val() );
 
   // create a new employee instance
   let employeeNew = new Employee(inFirstName, inLastName, inID, inTitle, inSalary);
@@ -38,7 +37,8 @@ function addToArray (){
 
   // increment monthly total
   monthlyTotal += employeeNew.calculateMonthlySalary();
-
+  console.log('After calculated monthly salary:', monthlyTotal);
+  
 } // end addToArray function
 
 // function to update the employee table on the DOM
@@ -59,14 +59,13 @@ function displayEmployees() {
       person.jobTitle + '</td><td>' + person.annualSalary + '</td>' +
       '<td><button id=deleteRow' + i + ' class="deleteEmployee">Delete</button></td>' +
       '</tr>';
-    console.log(tableRow);
     tableDocument.append(tableRow);
   } // end for of loop
 
   // display new Monthly Total
   let totalDisplay = $( '#totalSection' );
   totalDisplay.empty();
-  totalDisplay.append (`<h3>Total Monthly: ${monthlyTotal}</h3>`);
+  totalDisplay.append(`<h3>Total Monthly: $ ${monthlyTotal.toFixed(2)} </h3>`);
 
 } // end of displayEmployees function
 
@@ -74,7 +73,6 @@ function displayEmployees() {
 function addEmployee () {
   // get input fields
   event.preventDefault();
-  console.log(' submit button clicked ');
   // call to add to the array
   addToArray();
   // Clear fields after retreiving them
