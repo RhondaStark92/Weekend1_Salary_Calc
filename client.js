@@ -93,6 +93,10 @@ function displayEmployees() {
   let totalDisplay = $( '#totalSection' );
   totalDisplay.empty();
   totalDisplay.append(`<h3>Total Monthly: $ ${monthlyTotal.toFixed(2)} </h3>`);
+  // display monthly total in the red if > 20000
+  if (monthlyTotal > 20000) {
+    totalDisplay.toggleClass('inTheRed');
+  }
 
 } // end of displayEmployees function
 
