@@ -20,6 +20,33 @@ class Employee{
 let employeesArray = [];
 let monthlyTotal = 0;
 
+
+// DOM loaded
+$( document ).ready ( readyNow );
+
+// function once DOM is loaded and ready
+function readyNow () {
+  console.log( 'JQ' );
+  // setup listener on add employee button
+  $( '#addEmployee' ).on( 'click', addEmployee );
+  // setup listener on table for delete button
+  $("#tableEmployees").on ( 'click', '.deleteEmployee', deleteEmployee );
+} // end readyNowfunction
+
+// function for on click event for submit button
+function addEmployee () {
+  // get input fields
+  event.preventDefault();
+  // call to add to the array
+  addToArray();
+  // Clear fields after retreiving them
+  $("#inputForm").trigger('reset');
+  // Set focus to First Name
+  $("#firstNameIn").focus();
+  // call function to update table 
+  displayEmployees();
+} // end addEmployee function
+
 // function to add employee from input to the array
 function addToArray (){
   // retrieve input from the DOM
@@ -54,10 +81,10 @@ function displayEmployees() {
   // loop through the array of employees
   for ( let i = 0; i < employeesArray.length; i++ ) {
     person = employeesArray[i];
-    tableRow = '<tr><td>' + person.firstName + '</td><td>' + 
+    tableRow = '<tr id=row' + i + '><td>' + person.firstName + '</td><td>' + 
       person.LastName + '</td><td>' + person.idNum + '</td><td>' + 
       person.jobTitle + '</td><td>' + person.annualSalary + '</td>' +
-      '<td><button id=deleteRow' + i + ' class="deleteEmployee">Delete</button></td>' +
+      '<td><button id=' + i + ' class="deleteEmployee">Delete</button></td>' +
       '</tr>';
     tableDocument.append(tableRow);
   } // end for of loop
@@ -69,32 +96,8 @@ function displayEmployees() {
 
 } // end of displayEmployees function
 
-// function for on click event for submit button
-function addEmployee () {
-  // get input fields
-  event.preventDefault();
-  // call to add to the array
-  addToArray();
-  // Clear fields after retreiving them
-  $("#inputForm").trigger('reset');
-  // Set focus to First Name
-  $("#firstNameIn").focus();
-  // call function to update table 
-  displayEmployees();
-} // end addEmployee function
-
-// DOM loaded
-$( document ).ready ( readyNow );
-
-// function once DOM is loaded and ready
-function readyNow () {
-  console.log( 'JQ' );
-  $( '#addEmployee' ).on( 'click', addEmployee );
-
-  // setup listener on table
-  // $('#movieList').on('click', '.lendMovie', lendMovie);
-  $("#tableEmployees").on ( 'click', function() {
-    console.log (' table clicked ');
-    //$("input").after(" Text marked!");
-  });
-} // end readyNowfunction
+// delete employee function 
+function deleteEmployee () {
+  let rowToDelete =  $('tr#row' + event.target.id);
+  rowToDelete.remove();
+} // end of deleteEmployee function
