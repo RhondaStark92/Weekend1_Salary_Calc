@@ -3,10 +3,10 @@ html {
 }
 
 body {
-  background-color: #f3f3f3;
+  background-color: white;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  color: rgba(128,138,138,1);
+  color: #454545;
   /* margin: 0px !important; */
   line-height: 1.8;
   width: 90%;
@@ -14,7 +14,7 @@ body {
 }
 
 .main {
-  box-shadow: 1px 0px 14px 0px #888888;
+  box-shadow: 1px 0px 10px 0px #888888;
   /* background-color: lightblue; */
   /* border: 1px solid lightslategray; */
   padding-top: 0px;
@@ -22,19 +22,19 @@ body {
 }
 
 #inputSection {
-  background-color: pink;
+  /* background-color: pink; */
   padding: 20px;
   margin: auto;
 }
 
 #employeeSection {
-  background-color: lightsalmon;
+  /* background-color: lightsalmon; */
   padding: 20px;
   margin: auto;
 }
 
 #totalSection {
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
   text-align: right;
   padding: 20px;
   margin: auto;
@@ -45,7 +45,7 @@ h1 {
     font-size: 26px;
     font-weight: 400;
     text-transform: uppercase;
-    background-color: lightslategray;
+    background-color: #5b727c;
     color: white;
     text-align: center;
     margin-top: 0px;
@@ -66,7 +66,12 @@ h3 {
 
 .inTheRed {
   color: white;
-  background-color: red !important;
+  background-color: #cc6161 !important;
+}
+
+.inTheBlack {
+  color: #5b727c;
+  background-color: white !important;
 }
   
 form {
@@ -77,20 +82,34 @@ form {
 table {
   border-collapse: collapse;
   width: 100%;
-  border: 1px solid lightgray;
+  border: 1px solid #a1afba;
+}
+
+tr {
+  background-color: white;
 }
 
 th, td {
   text-align: left;
-  /* padding: 5px; */
+  min-height: 25px;
+  padding: 5px;
 }
 
-tr:nth-child(even){
+th smallColumn, td smallColumn {
+  width: 5%;
+}
+
+tr:nth-child(odd){
   background-color: #f2f2f2;
 }
 
+tr.lastRow {
+  height: 25px;
+  background-color: lightgrey;
+}
+
 th {
-  background-color: #2C3852;
+  background-color: #5b727c;
   color: white;
   font-size: 18px;
 }
@@ -101,15 +120,15 @@ input {
 }
 
 button {
-  /* float: right; */
-  margin: 20px;
-  background-color: #2C3852; /* Green */
+  float: right;
+  margin: 5px;
+  background-color: #a1afba;
   border: none;
   color: white;
   padding: 8px 14px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
+  display: inline-block;
   font-size: 16px;
   cursor: pointer;
 }

@@ -61,10 +61,6 @@ function addToArray (){
 
   // add new employee to the array
   employeesArray.push(employeeNew);
-
-  // increment monthly total
-  monthlyTotal += employeeNew.calculateMonthlySalary();
-  console.log('After calculated monthly salary:', monthlyTotal);
   
 } // end addToArray function
 
@@ -72,15 +68,21 @@ function addToArray (){
 function displayEmployees() {
   // retrieve the table from the DOM and setup the header row
   let tableDocument = $( '#tableEmployees' );
-  let tableRow = `<tr><th>First Name</th><th>Last Name</th><th>ID</th>
+  let tableRow = `<tr><th>First Name</th><th>Last Name</th><th class="smallColumn">ID</th>
     <th>Title</th><th>Annual Salary</th><th></th></tr>`;
   // clear the table and add the header row
   tableDocument.empty();
   tableDocument.append(tableRow);
-  let person;
+  monthlyTotal = 0;
+  console.log('monthlyTotal before loop', monthlyTotal);
+  
   // loop through the array of employees
   for ( let i = 0; i < employeesArray.length; i++ ) {
-    person = employeesArray[i];
+    let person = employeesArray[i];
+    // increment monthly total
+    monthlyTotal += person.calculateMonthlySalary();
+    console.log('After calculated monthly salary:', monthlyTotal);
+    // setup row
     tableRow = '<tr id=row' + i + '><td>' + person.firstName + '</td><td>' + 
       person.LastName + '</td><td>' + person.idNum + '</td><td>' + 
       person.jobTitle + '</td><td>' + person.annualSalary + '</td>' +
@@ -89,12 +91,20 @@ function displayEmployees() {
     tableDocument.append(tableRow);
   } // end for of loop
 
+  // add blank row at bottom for styling
+  tableRow = `<tr class="lastRow"><td></td><td></td><td></td>
+  <td></td><td></td><td></td></tr>`;
+  tableDocument.append(tableRow);
+
   // display new Monthly Total
   let totalDisplay = $( '#totalSection' );
   totalDisplay.empty();
   totalDisplay.append(`<h3>Total Monthly: $ ${monthlyTotal.toFixed(2)} </h3>`);
   // display monthly total in the red if > 20000
+  console.log('before check monthly salary:', monthlyTotal);
   if (monthlyTotal > 20000) {
+    totalDisplay.toggleClass('inTheRed');
+  } else if (monthlyTotal <= 20000 && totalDisplay.hasClass('inTheRed')) {
     totalDisplay.toggleClass('inTheRed');
   }
 
@@ -102,6 +112,9 @@ function displayEmployees() {
 
 // delete employee function 
 function deleteEmployee () {
-  let rowToDelete =  $('tr#row' + event.target.id);
-  rowToDelete.remove();
+  // delete from array
+  employeesArray.splice(event.target.id, 1);
+  displayEmployees();
+  // let rowToDelete =  $('tr#row' + event.target.id);
+  // rowToDelete.remove();
 } // end of deleteEmployee function
