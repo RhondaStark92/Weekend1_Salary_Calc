@@ -61,7 +61,7 @@ h2 {
 
 h3 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .inTheRed {
@@ -95,8 +95,8 @@ th, td {
   padding: 5px;
 }
 
-th smallColumn, td smallColumn {
-  width: 5%;
+th.smallColumn, td.smallColumn {
+  /* width: 5%; */
 }
 
 tr:nth-child(odd){
@@ -119,8 +119,13 @@ input {
   font-size: 16px;
 }
 
+.inputGroup {
+  display: inline-block;
+}
+
 button {
   float: right;
+  display: inline-block;
   margin: 5px;
   background-color: #a1afba;
   border: none;
@@ -128,7 +133,6 @@ button {
   padding: 8px 14px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   cursor: pointer;
 }

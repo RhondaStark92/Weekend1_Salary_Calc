@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bonus Calculator Object Challenge</title>
+    <title>Weekend Challenge - Week 1</title>
     <style>@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');</style>
     <script src="jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="client.js" charset="utf-8"></script>
@@ -15,12 +15,29 @@
       <section id="inputSection">
           <h2>Add Employee</h2>
           <form id="inputForm">
-            <input id="firstNameIn" type="text" placeholder="First Name"/>
-            <input id="lastNameIn" type="text" placeholder="Last Name"/>
-            <input id="idIn" type="text" maxlength="8" size="8" placeholder="ID"/>
-            <input id="titleIn" placeholder="Title"/>
-            <input id="salaryIn" placeholder="Annual Salary"/>
-            <button id="addEmployee">Submit</button>
+            <div class="inputGroup">
+              <label for="firstNameIn">First Name</label><br>
+              <input id="firstNameIn" type="text"/>
+            </div>
+            <div class="inputGroup">
+              <label for="lastNameIn">Last Name</label><br>
+              <input id="lastNameIn" type="text"/>
+            </div>  
+            <div class="inputGroup">
+              <label for="idIn">ID</label><br>
+              <input id="idIn" type="text" maxlength="8" size="8"/>
+            </div>
+            <div class="inputGroup">
+                <label for="titleIn">Title</label><br>
+                <input id="titleIn" type = "text"/>
+            </div>
+            <div class="inputGroup">
+              <label for="salaryIn">Annual Salary</label><br>
+              <input id="salaryIn" type = "number"/>
+            </div>
+            <div>
+              <button id="addEmployee">Submit</button>
+            </div>
           </form>
           <!-- <button id="addEmployee">Submit</button> -->
       </section>

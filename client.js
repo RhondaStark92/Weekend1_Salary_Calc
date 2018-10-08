@@ -20,7 +20,6 @@ class Employee{
 let employeesArray = [];
 let monthlyTotal = 0;
 
-
 // DOM loaded
 $( document ).ready ( readyNow );
 
@@ -38,13 +37,14 @@ function addEmployee () {
   // get input fields
   event.preventDefault();
   // call to add to the array
-  addToArray();
-  // Clear fields after retreiving them
-  $("#inputForm").trigger('reset');
-  // Set focus to First Name
-  $("#firstNameIn").focus();
-  // call function to update table 
-  displayEmployees();
+  if ( addToArray() ) {
+    // Clear fields after retreiving them
+    $("#inputForm").trigger('reset');
+    // Set focus to First Name
+    $("#firstNameIn").focus();
+    // call function to update table 
+    displayEmployees();
+  } // end if
 } // end addEmployee function
 
 // function to add employee from input to the array
@@ -56,12 +56,20 @@ function addToArray (){
   let inTitle = $( '#titleIn' ).val();
   let inSalary = parseFloat( $('#salaryIn').val() );
 
+  // verify that all input has been entered
+  if (inFirstName == '' || inLastName == '' || inID == '' || inTitle == '' 
+    || inSalary == '') {
+    alert('Must enter all input values');
+    $("#firstNameIn").focus();
+    return false;
+  }
   // create a new employee instance
   let employeeNew = new Employee(inFirstName, inLastName, inID, inTitle, inSalary);
 
   // add new employee to the array
   employeesArray.push(employeeNew);
   
+  return true;
 } // end addToArray function
 
 // function to update the employee table on the DOM
@@ -74,7 +82,6 @@ function displayEmployees() {
   tableDocument.empty();
   tableDocument.append(tableRow);
   monthlyTotal = 0;
-  console.log('monthlyTotal before loop', monthlyTotal);
   
   // loop through the array of employees
   for ( let i = 0; i < employeesArray.length; i++ ) {
@@ -100,10 +107,10 @@ function displayEmployees() {
   let totalDisplay = $( '#totalSection' );
   totalDisplay.empty();
   totalDisplay.append(`<h3>Total Monthly: $ ${monthlyTotal.toFixed(2)} </h3>`);
-  // display monthly total in the red if > 20000
-  console.log('before check monthly salary:', monthlyTotal);
-  if (monthlyTotal > 20000) {
+  // display monthly total in the red if > 20000 and hasn't been toggled on yet
+  if (monthlyTotal > 20000 && !totalDisplay.hasClass('inTheRed') ) {
     totalDisplay.toggleClass('inTheRed');
+  // toggle back from red if < 20000 and already toggled on
   } else if (monthlyTotal <= 20000 && totalDisplay.hasClass('inTheRed')) {
     totalDisplay.toggleClass('inTheRed');
   }
@@ -112,9 +119,8 @@ function displayEmployees() {
 
 // delete employee function 
 function deleteEmployee () {
-  // delete from array
+  // remove from array
   employeesArray.splice(event.target.id, 1);
+  // redisplay table
   displayEmployees();
-  // let rowToDelete =  $('tr#row' + event.target.id);
-  // rowToDelete.remove();
 } // end of deleteEmployee function
