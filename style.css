@@ -93,10 +93,11 @@ th, td {
   text-align: left;
   min-height: 25px;
   padding: 5px;
+  width: 15%;
 }
 
 th.smallColumn, td.smallColumn {
-  /* width: 5%; */
+  width: 10%;
 }
 
 tr:nth-child(odd){
